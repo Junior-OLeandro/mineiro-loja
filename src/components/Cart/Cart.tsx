@@ -1,4 +1,4 @@
-import "./Cart.css";
+import "./cart.css";
 
 import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
