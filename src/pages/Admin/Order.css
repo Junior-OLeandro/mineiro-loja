@@ -1,0 +1,1168 @@
+/* =========================================================
+   PÁGINA DE HISTÓRICO
+========================================================= */
+
+.admin-orders-page {
+  min-height: 100vh;
+  background: #f4f4f5;
+  color: #18181b;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-header {
+  background: #111;
+  color: #fff;
+  padding: 18px 24px;
+  border-bottom: 1px solid #242424;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+.admin-header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.admin-brand h1 {
+  margin: 0;
+
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.admin-brand p {
+  margin: 4px 0 0;
+
+  color: #a1a1aa;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+.admin-logout {
+  border: 1px solid #333;
+  background: #1f1f1f;
+  color: #fff;
+
+  padding: 10px 18px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.admin-logout:hover {
+  background: #2a2a2a;
+  border-color: #444;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.admin-content {
+  max-width: 1280px;
+  margin: 0 auto;
+
+  padding: 34px 24px 60px;
+}
+
+.admin-welcome {
+  margin-bottom: 24px;
+}
+
+.admin-welcome h2 {
+  margin: 0 0 7px;
+
+  font-size: 28px;
+  font-weight: 900;
+
+  letter-spacing: -0.5px;
+}
+
+.admin-welcome p {
+  margin: 0;
+
+  color: #71717a;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.orders-filters {
+  display: grid;
+
+  grid-template-columns:
+    minmax(170px, 0.8fr)
+    minmax(200px, 1fr)
+    minmax(180px, 0.9fr)
+    minmax(180px, 0.9fr)
+    auto;
+
+  align-items: end;
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+
+  padding: 20px;
+
+  background: #fff;
+
+  border: 1px solid #e4e4e7;
+  border-radius: 14px;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.orders-filter-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.orders-filter-group label {
+  font-size: 12px;
+  font-weight: 800;
+
+  color: #52525b;
+}
+
+.orders-filter-group input,
+.orders-filter-group select {
+  width: 100%;
+
+  min-height: 42px;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  border: 1px solid #d4d4d8;
+  border-radius: 9px;
+
+  background: #fafafa;
+
+  color: #18181b;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.orders-filter-group input::placeholder {
+  color: #a1a1aa;
+}
+
+.orders-filter-group input:hover,
+.orders-filter-group select:hover {
+  background: #fff;
+}
+
+.orders-filter-group input:focus,
+.orders-filter-group select:focus {
+  background: #fff;
+
+  border-color: #18181b;
+
+  box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08);
+}
+
+/* =========================================================
+   BOTÃO LIMPAR
+========================================================= */
+
+.orders-clear-filters {
+  min-height: 42px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #d4d4d8;
+  border-radius: 9px;
+
+  background: #fff;
+  color: #27272a;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.orders-clear-filters:hover {
+  background: #f4f4f5;
+
+  border-color: #a1a1aa;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   CONTADOR DE RESULTADOS
+========================================================= */
+
+.orders-results-count {
+  margin: 18px 0 12px;
+
+  color: #71717a;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   LISTA DE PEDIDOS
+========================================================= */
+
+.admin-history-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+/* =========================================================
+   CARD DO PEDIDO
+========================================================= */
+
+.admin-history-card {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 28px;
+
+  min-height: 78px;
+
+  padding: 16px 18px 16px 20px;
+
+  background: #fff;
+
+  border: 1px solid #e4e4e7;
+  border-radius: 14px;
+
+  box-shadow:
+    0 2px 7px rgba(0, 0, 0, 0.035),
+    0 1px 2px rgba(0, 0, 0, 0.025);
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+/*
+  Pequeno detalhe visual indicando que o card
+  é interativo.
+*/
+
+.admin-history-card::after {
+  content: "›";
+
+  position: absolute;
+
+  right: 9px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #d4d4d8;
+
+  font-size: 20px;
+  font-weight: 400;
+
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.admin-history-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #c7c7cc;
+
+  background: #fff;
+
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.07),
+    0 2px 6px rgba(0, 0, 0, 0.035);
+}
+
+.admin-history-card:hover::after {
+  color: #71717a;
+
+  transform: translate(2px, -50%);
+}
+
+.admin-history-card:active {
+  transform: translateY(0);
+}
+
+.admin-history-card:focus {
+  outline: 2px solid #18181b;
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   LADO ESQUERDO
+========================================================= */
+
+.admin-history-card > div:first-child {
+  min-width: 0;
+
+  padding-right: 20px;
+}
+
+/* Número do pedido */
+
+.admin-history-card > div:first-child strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #18181b;
+
+  font-size: 17px;
+  font-weight: 900;
+
+  letter-spacing: -0.2px;
+}
+
+/* Cliente */
+
+.admin-history-card > div:first-child p {
+  margin: 0 0 5px;
+
+  color: #27272a;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Data / horário */
+
+.admin-history-card > div:first-child span {
+  display: block;
+
+  color: #a1a1aa;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   LADO DIREITO
+========================================================= */
+
+.admin-history-card > div:last-child {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 18px;
+
+  padding-right: 17px;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   VALOR
+========================================================= */
+
+.admin-history-card > div:last-child strong {
+  display: flex;
+
+  align-items: center;
+
+  min-height: 36px;
+
+  padding: 0 12px;
+
+  border-radius: 8px;
+
+  background: #f4f4f5;
+
+  color: #18181b;
+
+  font-size: 15px;
+  font-weight: 900;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.admin-status-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 100px;
+
+  min-height: 30px;
+
+  box-sizing: border-box;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 0.1px;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   STATUS — NOVO
+========================================================= */
+
+.admin-status-pending {
+  background: #fff7d6;
+  color: #8a6200;
+
+  box-shadow: inset 0 0 0 1px rgba(138, 98, 0, 0.08);
+}
+
+/* =========================================================
+   STATUS — CONFIRMADO
+========================================================= */
+
+.admin-status-confirmed {
+  background: #e0edff;
+  color: #2458a6;
+
+  box-shadow: inset 0 0 0 1px rgba(36, 88, 166, 0.08);
+}
+
+/* =========================================================
+   STATUS — EM PREPARO
+========================================================= */
+
+.admin-status-preparing {
+  background: #fff0d4;
+  color: #9a5a00;
+
+  box-shadow: inset 0 0 0 1px rgba(154, 90, 0, 0.08);
+}
+
+/* =========================================================
+   STATUS — PRONTO
+========================================================= */
+
+.admin-status-ready {
+  background: #dcfce7;
+  color: #166534;
+
+  box-shadow: inset 0 0 0 1px rgba(22, 101, 52, 0.08);
+}
+
+/* =========================================================
+   STATUS — EM ENTREGA
+========================================================= */
+
+.admin-status-delivering {
+  background: #eee7ff;
+  color: #6540a5;
+
+  box-shadow: inset 0 0 0 1px rgba(101, 64, 165, 0.08);
+}
+
+/* =========================================================
+   STATUS — CONCLUÍDO
+========================================================= */
+
+.admin-status-completed {
+  background: #e7e7e9;
+  color: #52525b;
+
+  box-shadow: inset 0 0 0 1px rgba(82, 82, 91, 0.08);
+}
+
+/* =========================================================
+   STATUS — CANCELADO
+========================================================= */
+
+.admin-status-cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+
+  box-shadow: inset 0 0 0 1px rgba(185, 28, 28, 0.08);
+}
+
+/* =========================================================
+   ESTADOS DE CARREGAMENTO / ERRO
+========================================================= */
+
+.admin-content > p {
+  margin: 16px 0 0;
+
+  padding: 18px;
+
+  background: #fff;
+
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+
+  color: #71717a;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.order-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.68);
+
+  backdrop-filter: blur(3px);
+
+  overflow-y: auto;
+}
+
+.order-modal {
+  width: 100%;
+  max-width: 720px;
+
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  background: #fff;
+
+  border: 1px solid #e4e4e7;
+
+  border-radius: 18px;
+
+  padding: 26px;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.25),
+    0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   HEADER DO MODAL
+========================================================= */
+
+.order-modal-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #ededed;
+}
+
+.order-modal-header span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #a1a1aa;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.order-modal-header h2 {
+  margin: 0;
+
+  color: #18181b;
+
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.order-modal-close {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border: 1px solid #e4e4e7;
+  border-radius: 50%;
+
+  background: #f4f4f5;
+  color: #3f3f46;
+
+  font-size: 25px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.order-modal-close:hover {
+  background: #e4e4e7;
+
+  transform: rotate(4deg);
+}
+
+/* =========================================================
+   STATUS DO MODAL
+========================================================= */
+
+.order-modal-status {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 16px 0;
+
+  color: #71717a;
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+.order-modal-section {
+  padding: 20px 0;
+
+  border-top: 1px solid #ededed;
+}
+
+.order-modal-section h3 {
+  margin: 0 0 15px;
+
+  color: #18181b;
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+/* =========================================================
+   INFORMAÇÕES
+========================================================= */
+
+.order-info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 14px;
+}
+
+.order-info-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.order-info-grid div,
+.order-info-list div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.order-info-grid span,
+.order-info-list span {
+  color: #a1a1aa;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.order-info-grid strong,
+.order-info-list strong {
+  color: #27272a;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   ITENS
+========================================================= */
+
+.order-items-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.order-item {
+  padding: 15px;
+
+  background: #f8f8f8;
+
+  border: 1px solid #ededed;
+  border-radius: 11px;
+}
+
+.order-item-main {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.order-item-main > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.order-item-main strong {
+  color: #27272a;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.order-item-main span {
+  color: #71717a;
+
+  font-size: 12px;
+}
+
+.order-item-extras {
+  margin-top: 12px;
+
+  padding-top: 10px;
+
+  border-top: 1px solid #dedede;
+
+  color: #71717a;
+
+  font-size: 12px;
+}
+
+.order-item-extras > span {
+  color: #52525b;
+
+  font-weight: 800;
+}
+
+.order-item-extras ul {
+  margin: 6px 0 0;
+
+  padding-left: 18px;
+}
+
+.order-item-extras li {
+  margin-bottom: 3px;
+}
+
+/* =========================================================
+   OBSERVAÇÃO
+========================================================= */
+
+.order-observation {
+  margin: 0;
+
+  padding: 13px 14px;
+
+  background: #fafafa;
+
+  border: 1px solid #ededed;
+  border-radius: 9px;
+
+  color: #52525b;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.order-modal-total {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #ededed;
+}
+
+.order-modal-total > div {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  color: #71717a;
+
+  font-size: 13px;
+}
+
+.order-modal-total > div strong {
+  color: #3f3f46;
+}
+
+.order-total-final {
+  margin-top: 6px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #dedede;
+
+  color: #18181b !important;
+
+  font-size: 18px !important;
+  font-weight: 900;
+}
+
+.order-total-final strong {
+  color: #18181b !important;
+
+  font-size: 21px;
+  font-weight: 900;
+}
+
+/* =========================================================
+   BOTÃO FINAL
+========================================================= */
+
+.order-modal-footer-button {
+  width: 100%;
+
+  margin-top: 20px;
+
+  padding: 13px 18px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.order-modal-footer-button:hover {
+  background: #292929;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+  .orders-filters {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr))
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .orders-clear-filters {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .admin-header {
+    padding: 16px;
+  }
+
+  .admin-header-content {
+    gap: 12px;
+  }
+
+  .admin-brand h1 {
+    font-size: 24px;
+  }
+
+  .admin-brand p {
+    font-size: 12px;
+  }
+
+  .admin-logout {
+    padding: 9px 14px;
+  }
+
+  .admin-content {
+    padding: 24px 16px 45px;
+  }
+
+  .admin-welcome h2 {
+    font-size: 23px;
+  }
+
+  .orders-filters {
+    grid-template-columns: 1fr;
+
+    padding: 16px;
+
+    gap: 12px;
+
+    border-radius: 12px;
+  }
+
+  .orders-results-count {
+    margin-top: 16px;
+  }
+
+  /* =======================================================
+     CARD MOBILE
+  ======================================================= */
+
+  .admin-history-list {
+    gap: 10px;
+  }
+
+  .admin-history-card {
+    align-items: stretch;
+
+    flex-direction: column;
+
+    gap: 13px;
+
+    min-height: auto;
+
+    padding: 15px 16px;
+  }
+
+  .admin-history-card::after {
+    display: none;
+  }
+
+  .admin-history-card > div:first-child {
+    padding-right: 0;
+  }
+
+  .admin-history-card > div:first-child strong {
+    font-size: 16px;
+  }
+
+  .admin-history-card > div:first-child p {
+    max-width: 100%;
+
+    font-size: 14px;
+  }
+
+  .admin-history-card > div:last-child {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-right: 0;
+
+    padding-top: 11px;
+
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .admin-history-card > div:last-child strong {
+    min-height: 34px;
+
+    padding: 0 10px;
+
+    font-size: 14px;
+  }
+
+  .admin-status-badge {
+    min-width: 96px;
+  }
+
+  /* =======================================================
+     MODAL
+  ======================================================= */
+
+  .order-modal-overlay {
+    align-items: flex-start;
+
+    padding: 10px;
+  }
+
+  .order-modal {
+    max-height: calc(100vh - 20px);
+
+    padding: 19px;
+
+    border-radius: 14px;
+  }
+
+  .order-modal-header h2 {
+    font-size: 24px;
+  }
+
+  .order-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-item-main {
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .order-modal-status {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+}
+
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
+
+@media (max-width: 420px) {
+  .admin-header-content {
+    gap: 8px;
+  }
+
+  .admin-brand h1 {
+    font-size: 21px;
+  }
+
+  .admin-brand p {
+    display: none;
+  }
+
+  .admin-logout {
+    padding: 8px 12px;
+
+    font-size: 13px;
+  }
+
+  .admin-history-card > div:last-child {
+    align-items: center;
+
+    flex-direction: row;
+
+    gap: 8px;
+  }
+
+  .admin-status-badge {
+    min-width: auto;
+
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .admin-history-card > div:last-child strong {
+    font-size: 13px;
+  }
+
+  .order-modal {
+    padding: 16px;
+  }
+}

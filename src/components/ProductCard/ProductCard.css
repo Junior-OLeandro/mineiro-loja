@@ -1,0 +1,175 @@
+.product-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  overflow-y: auto;
+}
+
+.product-modal {
+  position: relative;
+
+  width: min(100%, 560px);
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  background: #fff;
+  border-radius: 16px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.product-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  z-index: 2;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.product-modal__image {
+  display: block;
+
+  width: 100%;
+  height: 280px;
+
+  object-fit: cover;
+}
+
+.product-modal__content {
+  padding: 24px;
+}
+
+.product-modal__content h2 {
+  margin: 0 0 8px;
+}
+
+.product-modal__description {
+  margin: 0 0 20px;
+}
+
+.product-modal__section {
+  margin-top: 24px;
+}
+
+.product-modal__section h3 {
+  margin: 0 0 12px;
+}
+
+.product-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-modal__options label,
+.product-modal__extras label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.product-modal__options label.selected,
+.product-modal__extras label.selected {
+  border-color: #222;
+  background: #f5f5f5;
+}
+
+.product-modal__options label strong,
+.product-modal__extras label strong {
+  margin-left: auto;
+}
+
+.product-modal__extras {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-modal__extras input,
+.product-modal__options input {
+  cursor: pointer;
+}
+
+.product-modal__section textarea {
+  width: 100%;
+  resize: vertical;
+
+  padding: 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  font: inherit;
+}
+
+.product-modal__add {
+  width: 100%;
+
+  margin-top: 24px;
+  padding: 14px 18px;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font: inherit;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .product-modal__overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .product-modal {
+    width: 100%;
+    max-height: 92vh;
+
+    border-radius: 18px 18px 0 0;
+  }
+
+  .product-modal__image {
+    height: 220px;
+  }
+
+  .product-modal__content {
+    padding: 20px;
+  }
+}

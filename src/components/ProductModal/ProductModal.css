@@ -1,0 +1,14 @@
+.product-modal__options label.selected,
+.product-modal__extras label.selected {
+  border-color: #222;
+}
+
+.product-modal__options label,
+.product-modal__extras label {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.product-modal__options label.selected,
+.product-modal__extras label.selected {
+  background: #f5f5f5;
+}

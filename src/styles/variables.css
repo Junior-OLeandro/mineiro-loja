@@ -1,0 +1,14 @@
+:root {
+
+  --color-primary: #000;
+  --color-background: #fff;
+  --color-text: #000;
+
+  --font-family-base: sans-serif;
+
+  --container-width: 1200px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}

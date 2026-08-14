@@ -1,0 +1,26 @@
+.category-section {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.category-section__header {
+  margin-bottom: 20px;
+}
+
+.category-section__header h2 {
+  font-size: 1.6rem;
+}
+
+.category-section__products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .category-section__products {
+    grid-template-columns: 1fr;
+  }
+}
