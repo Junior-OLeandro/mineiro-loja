@@ -1166,3 +1166,7 @@
     padding: 16px;
   }
 }
+
+/* Identidade Mineiro no cabeçalho do histórico de pedidos */
+.admin-header { background: var(--color-header); border-bottom-color: var(--color-border); color: var(--color-text); }
+.admin-brand-logo { display: block; width: 110px; height: 42px; object-fit: contain; object-position: left center; }.admin-brand-logo--light { display: none; }.theme-light .admin-brand-logo--dark { display: none; }.theme-light .admin-brand-logo--light { display: block; }.admin-brand p { color: var(--color-text-muted); }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
+import logo from "../../assets/images/logomarca.png";
+import darkLogo from "../../assets/images/logoescura.png";
 import "./Order.css";
 
 interface OrderItemExtra {
@@ -402,7 +404,8 @@ function Orders() {
       <header className="admin-header">
         <div className="admin-header-content">
           <div className="admin-brand">
-            <h1>Mineiro</h1>
+            <img className="admin-brand-logo admin-brand-logo--dark" src={logo} alt="Mineiro Hamburgueria" />
+            <img className="admin-brand-logo admin-brand-logo--light" src={darkLogo} alt="Mineiro Hamburgueria" />
 
             <p>Histórico de pedidos</p>
           </div>

@@ -3,21 +3,25 @@ import { products } from "../../data/product";
 import { useEffect, useState } from "react";
 import CategorySection from "../CategorySection/CategorySection";
 import logo from "../../assets/images/logomarca.png";
+import darkLogo from "../../assets/images/logoescura.png";
 import "./Menu.css";
 
 const orderedCategories = categories.slice().sort((a, b) => a.order - b.order);
 
 function Menu() {
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(
+    () => localStorage.getItem("mineiro-theme") === "light",
+  );
 
   useEffect(() => {
     document.body.classList.toggle("theme-light", isLightTheme);
+    localStorage.setItem("mineiro-theme", isLightTheme ? "light" : "dark");
   }, [isLightTheme]);
   return (
     <div className="store-menu">
       <header className="store-menu__header">
         <a className="store-menu__brand" href="#combos" aria-label="Mineiro Hamburgueria - início">
-          <img src={logo} alt="Mineiro Hamburgueria" />
+          <img src={isLightTheme ? darkLogo : logo} alt="Mineiro Hamburgueria" />
         </a>
         <nav className="store-menu__navigation" aria-label="Categorias">
           {orderedCategories.map((category) => (
@@ -35,9 +39,9 @@ function Menu() {
       </header>
 
       <section className="store-menu__hero" aria-label="Apresentação">
-        <p>Hambúrguer artesanal em Barbacena</p>
-        <h1>Feito no capricho,<br />do jeito mineiro.</h1>
-        <span>Escolha seus favoritos e monte seu pedido.</span>
+
+        <h1>Feito com<br />jeitinho mineiro.</h1>
+        <p>Escolha seus favoritos e monte seu pedido.</p>
       </section>
 
       <div className="store-menu__categories">
