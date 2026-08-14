@@ -235,3 +235,7 @@
     width: 100%;
   }
 }
+
+/* Tema Mineiro */
+.cart { background: var(--color-wine); color: var(--color-text); border-left: 1px solid var(--color-border); }
+.cart__header, .cart__footer { border-color: var(--color-border); }.cart__header h2 { font-family: var(--font-family-display); font-size: 2rem; font-weight: 400; }.cart__header span, .cart-item__content p, .cart-item__extras span { color: var(--color-text-muted); }.cart__close { background: rgba(255,255,255,.1); color: var(--color-text); }.cart-item { border-color: var(--color-border); }.cart-item__content h3 { font-family: var(--font-family-display); font-size: 1.35rem; font-weight: 400; }.cart-item__price, .cart__subtotal strong { color: var(--color-primary); }.cart-item__quantity { border-color: var(--color-border); }.cart-item__quantity button { background: rgba(255,255,255,.1); color: var(--color-text); }.cart-item__edit { color: var(--color-primary); }.cart-item__remove { color: var(--color-danger); }.cart__checkout, .cart__empty button { background: var(--color-primary); color: #fff; }.cart__clear { color: var(--color-text-muted); }.cart__empty { color: var(--color-text-muted); }

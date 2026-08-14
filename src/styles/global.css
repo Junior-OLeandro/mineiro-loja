@@ -2,10 +2,22 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: var(--font-family-base);
-  background-color: var(--color-background);
+  background: radial-gradient(circle at 50% -10%, #804038 0, var(--color-background) 44%, #431915 100%);
   color: var(--color-text);
 }
 
-#root {
-  min-height: 100vh;
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
+
+button {
+  transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+button:hover { transform: translateY(-1px); }
+button:active { transform: translateY(0); }
+
+#root { min-height: 100vh; }

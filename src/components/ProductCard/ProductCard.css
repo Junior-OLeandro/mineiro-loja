@@ -1,175 +1,29 @@
-.product-modal__overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background: rgba(0, 0, 0, 0.65);
-
-  overflow-y: auto;
-}
-
-.product-modal {
-  position: relative;
-
-  width: min(100%, 560px);
-  max-height: calc(100vh - 40px);
-
-  overflow-y: auto;
-
-  background: #fff;
-  border-radius: 16px;
-
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.product-modal__close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-
-  z-index: 2;
-
-  width: 36px;
-  height: 36px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(0, 0, 0, 0.65);
-  color: #fff;
-
-  font-size: 24px;
-  line-height: 1;
-
-  cursor: pointer;
-}
-
-.product-modal__image {
-  display: block;
-
-  width: 100%;
-  height: 280px;
-
-  object-fit: cover;
-}
-
-.product-modal__content {
-  padding: 24px;
-}
-
-.product-modal__content h2 {
-  margin: 0 0 8px;
-}
-
-.product-modal__description {
-  margin: 0 0 20px;
-}
-
-.product-modal__section {
-  margin-top: 24px;
-}
-
-.product-modal__section h3 {
-  margin: 0 0 12px;
-}
-
-.product-modal__options {
+.product-card {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  min-height: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: 0 10px 22px rgba(39, 0, 0, 0.12);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.product-modal__options label,
-.product-modal__extras label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 12px;
-
-  border: 1px solid #ddd;
-  border-radius: 10px;
-
-  cursor: pointer;
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(224, 122, 43, 0.72);
+  box-shadow: var(--shadow-lg);
 }
 
-.product-modal__options label.selected,
-.product-modal__extras label.selected {
-  border-color: #222;
-  background: #f5f5f5;
-}
-
-.product-modal__options label strong,
-.product-modal__extras label strong {
-  margin-left: auto;
-}
-
-.product-modal__extras {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.product-modal__extras input,
-.product-modal__options input {
-  cursor: pointer;
-}
-
-.product-modal__section textarea {
-  width: 100%;
-  resize: vertical;
-
-  padding: 12px;
-
-  border: 1px solid #ddd;
-  border-radius: 10px;
-
-  font: inherit;
-}
-
-.product-modal__add {
-  width: 100%;
-
-  margin-top: 24px;
-  padding: 14px 18px;
-
-  border: none;
-  border-radius: 10px;
-
-  cursor: pointer;
-
-  font: inherit;
-  font-weight: 700;
-}
-
-@media (max-width: 600px) {
-  .product-modal__overlay {
-    align-items: flex-end;
-    padding: 0;
-  }
-
-  .product-modal {
-    width: 100%;
-    max-height: 92vh;
-
-    border-radius: 18px 18px 0 0;
-  }
-
-  .product-modal__image {
-    height: 220px;
-  }
-
-  .product-modal__content {
-    padding: 20px;
-  }
-}
+.product-card__image { width: 100%; aspect-ratio: 1.35; object-fit: cover; }
+.product-card__content { display: flex; flex: 1; flex-direction: column; padding: 17px; }
+.product-card__name { font-family: var(--font-family-display); font-size: 1.38rem; font-weight: 400; line-height: 1.12; }
+.product-card__description { flex: 1; margin: 9px 0 16px; color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.5; }
+.product-card__footer { display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+.product-card__price, .product-card__prices strong { color: var(--color-primary); font-family: var(--font-family-display); font-size: 1.25rem; }
+.product-card__prices { display: grid; gap: 2px; color: var(--color-text-muted); font-size: 0.73rem; }
+.product-card__prices span { display: flex; gap: 5px; align-items: baseline; }
+.product-card__prices strong { font-family: var(--font-family-base); font-size: 0.82rem; }
+.product-card__footer button { padding: 10px 13px; border-radius: var(--radius-sm); background: var(--color-primary); color: #fff; font-weight: 800; font-size: 0.8rem; }
+.product-card__footer button:hover { background: var(--color-primary-hover); }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Store.css";
 
 import Menu from "../../components/Menu/Menu";
 import Cart from "../../components/Cart/Cart";

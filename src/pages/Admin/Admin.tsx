@@ -94,7 +94,7 @@ function Admin() {
   const [ordersError, setOrdersError] = useState("");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [updatingStatus, setUpdatingStatus] = useState(false);
-  const [showAllCompleted, setShowAllCompleted] = useState(false);
+  const [showAllCompleted] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
 const soundEnabledRef = useRef(false);
 
