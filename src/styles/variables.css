@@ -10,6 +10,7 @@
   --color-text-muted: #e5bcaa;
   --color-border: rgba(243, 216, 200, 0.16);
   --color-danger: #ff8f8f;
+  --color-header: rgba(87, 0, 0, 0.96);
   --font-family-base: "Open Sans", Arial, sans-serif;
   --font-family-display: "Alice", Georgia, serif;
   --container-width: 1200px;
@@ -17,4 +18,20 @@
   --radius-md: 12px;
   --radius-lg: 18px;
   --shadow-lg: 0 18px 45px rgba(36, 0, 0, 0.28);
+}
+
+body.theme-light {
+  --color-primary: #bc5b18;
+  --color-primary-hover: #9f4710;
+  --color-wine: #fff0e6;
+  --color-wine-deep: #f5d6c3;
+  --color-background: #f3d8c8;
+  --color-surface: rgba(255, 255, 255, 0.72);
+  --color-surface-strong: #ffffff;
+  --color-text: #570000;
+  --color-text-muted: #7a3b31;
+  --color-border: rgba(87, 0, 0, 0.18);
+  --color-danger: #b00020;
+  --color-header: rgba(255, 236, 221, 0.96);
+  --shadow-lg: 0 18px 45px rgba(87, 0, 0, 0.16);
 }

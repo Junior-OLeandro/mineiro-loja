@@ -1,5 +1,6 @@
 import { categories } from "../../data/categories";
 import { products } from "../../data/product";
+import { useEffect, useState } from "react";
 import CategorySection from "../CategorySection/CategorySection";
 import logo from "../../assets/images/logomarca.png";
 import "./Menu.css";
@@ -7,6 +8,11 @@ import "./Menu.css";
 const orderedCategories = categories.slice().sort((a, b) => a.order - b.order);
 
 function Menu() {
+  const [isLightTheme, setIsLightTheme] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("theme-light", isLightTheme);
+  }, [isLightTheme]);
   return (
     <div className="store-menu">
       <header className="store-menu__header">
@@ -18,6 +24,14 @@ function Menu() {
             <a key={category.id} href={`#${category.slug}`}>{category.name}</a>
           ))}
         </nav>
+        <button
+          type="button"
+          className="store-menu__theme-toggle"
+          onClick={() => setIsLightTheme((current) => !current)}
+          aria-label={isLightTheme ? "Ativar tema escuro" : "Ativar tema claro"}
+        >
+          {isLightTheme ? "Tema escuro" : "Tema claro"}
+        </button>
       </header>
 
       <section className="store-menu__hero" aria-label="Apresentação">

@@ -21,3 +21,5 @@ button:hover { transform: translateY(-1px); }
 button:active { transform: translateY(0); }
 
 #root { min-height: 100vh; }
+
+body.theme-light { background: radial-gradient(circle at 50% -10%, #fff9f4 0, var(--color-background) 48%, #e4b69f 100%); }
