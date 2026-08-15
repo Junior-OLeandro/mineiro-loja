@@ -104,6 +104,7 @@ function Admin() {
   const [manualStoreStatus, setManualStoreStatus] = useState<boolean | null>(null);
   const [productAvailability, setProductAvailability] = useState<Record<string, boolean>>({});
   const [deliveryTimeMinutes, setDeliveryTimeMinutes] = useState(45);
+  const [isStoreControlsExpanded, setIsStoreControlsExpanded] = useState(false);
   const [isProductControlsExpanded, setIsProductControlsExpanded] = useState(false);
 const soundEnabledRef = useRef(soundEnabled);
 
@@ -758,54 +759,70 @@ const enableSound = () => {
         </div>
 
         <section className="admin-store-controls">
-          <div>
-            <h3>Controle da loja</h3>
-            <p>
-              {manualStoreStatus === null
-                ? "Seguindo o horário automático"
-                : manualStoreStatus
-                  ? "Abertura manual ativa"
-                  : "Fechamento manual ativo"}
-            </p>
-          </div>
-          <div className="admin-store-controls__actions">
-            <button type="button" onClick={() => setStoreStatus(true)}>Abrir loja</button>
-            <button type="button" onClick={() => setStoreStatus(false)}>Fechar loja</button>
-            <button type="button" onClick={() => setStoreStatus(null)}>Seguir horário</button>
-          </div>
-          <div className="admin-delivery-time-control">
-            <label htmlFor="delivery-time-minutes">Tempo estimado de entrega (minutos)</label>
-            <input
-              id="delivery-time-minutes"
-              type="number"
-              min="1"
-              max="180"
-              value={deliveryTimeMinutes}
-              onChange={(event) => setDeliveryTimeMinutes(Number(event.target.value))}
-            />
-            <button type="button" onClick={saveDeliveryTime}>Salvar prazo</button>
-          </div>
           <button
             type="button"
-            className="admin-product-controls-toggle"
-            onClick={() => setIsProductControlsExpanded((current) => !current)}
-            aria-expanded={isProductControlsExpanded}
+            className="admin-store-controls__toggle"
+            onClick={() => setIsStoreControlsExpanded((current) => !current)}
+            aria-expanded={isStoreControlsExpanded}
+            aria-controls="store-controls-content"
           >
-            {isProductControlsExpanded ? "Ocultar itens" : `Gerenciar itens (${products.length})`}
+            <span>
+              <strong>Controle da loja</strong>
+              <small>
+                {manualStoreStatus === null
+                  ? "Seguindo o horário automático"
+                  : manualStoreStatus
+                    ? "Abertura manual ativa"
+                    : "Fechamento manual ativo"}
+              </small>
+            </span>
+            <span className="admin-store-controls__chevron" aria-hidden="true">
+              {isStoreControlsExpanded ? "⌃" : "⌄"}
+            </span>
           </button>
-          {isProductControlsExpanded && (
-            <div className="admin-product-controls">
-              {products.map((product) => {
-                const isAvailable = productAvailability[product.id] ?? true;
-                return (
-                  <div key={product.id}>
-                    <span>{product.name}</span>
-                    <button type="button" onClick={() => setProductStatus(product.id, !isAvailable)}>
-                      {isAvailable ? "Pausar" : "Ativar"}
-                    </button>
-                  </div>
-                );
-              })}
+
+          {isStoreControlsExpanded && (
+            <div id="store-controls-content" className="admin-store-controls__content">
+              <div className="admin-store-controls__actions">
+                <button type="button" onClick={() => setStoreStatus(true)}>Abrir loja</button>
+                <button type="button" onClick={() => setStoreStatus(false)}>Fechar loja</button>
+                <button type="button" onClick={() => setStoreStatus(null)}>Seguir horário</button>
+              </div>
+              <div className="admin-delivery-time-control">
+                <label htmlFor="delivery-time-minutes">Tempo estimado de entrega (minutos)</label>
+                <input
+                  id="delivery-time-minutes"
+                  type="number"
+                  min="1"
+                  max="180"
+                  value={deliveryTimeMinutes}
+                  onChange={(event) => setDeliveryTimeMinutes(Number(event.target.value))}
+                />
+                <button type="button" onClick={saveDeliveryTime}>Salvar prazo</button>
+              </div>
+              <button
+                type="button"
+                className="admin-product-controls-toggle"
+                onClick={() => setIsProductControlsExpanded((current) => !current)}
+                aria-expanded={isProductControlsExpanded}
+              >
+                {isProductControlsExpanded ? "Ocultar itens" : `Gerenciar itens (${products.length})`}
+              </button>
+              {isProductControlsExpanded && (
+                <div className="admin-product-controls">
+                  {products.map((product) => {
+                    const isAvailable = productAvailability[product.id] ?? true;
+                    return (
+                      <div key={product.id}>
+                        <span>{product.name}</span>
+                        <button type="button" onClick={() => setProductStatus(product.id, !isAvailable)}>
+                          {isAvailable ? "Pausar" : "Ativar"}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
         </section>
