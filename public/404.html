@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="robots" content="noindex" />
     <title>Redirecionando...</title>
+
     <script>
-      // GitHub Pages não possui rewrite para SPAs. Encaminha a URL original
-      // ao index.html, que a restaura antes de o React Router iniciar.
       (function (location) {
         const route = location.pathname
           .slice(1)
@@ -18,11 +17,14 @@
             location.host +
             "/?/" +
             route +
-            (location.search ? "&" + location.search.slice(1).replace(/&/g, "~and~") : "") +
-            location.hash,
+            (location.search
+              ? "&" + location.search.slice(1).replace(/&/g, "~and~")
+              : "") +
+            location.hash
         );
       })(window.location);
     </script>
   </head>
+
   <body></body>
 </html>
