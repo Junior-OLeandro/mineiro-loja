@@ -9,9 +9,10 @@ import "./ProductCard.css";
 
 interface ProductCardProps {
   product: Product;
+  isAvailable: boolean;
 }
 
-function ProductCard({ product }: ProductCardProps) {
+function ProductCard({ product, isAvailable }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { addToCart } = useCart();
@@ -19,6 +20,7 @@ function ProductCard({ product }: ProductCardProps) {
   const hasVariants = Boolean(product.prices);
 
   function handleAddClick() {
+    if (!isAvailable) return;
     const needsModal =
       hasVariants ||
       product.hasMeatChoice ||
@@ -114,8 +116,9 @@ function ProductCard({ product }: ProductCardProps) {
             <button
               type="button"
               onClick={handleAddClick}
+              disabled={!isAvailable}
             >
-              Adicionar
+              {isAvailable ? "Adicionar" : "Indisponível"}
             </button>
           </div>
         </div>

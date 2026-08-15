@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Store.css";
+import promotionImage from "../../assets/images/lanches/promocaobatata.webp";
 
 import Menu from "../../components/Menu/Menu";
 import Cart from "../../components/Cart/Cart";
@@ -8,6 +9,7 @@ import { toAnalyticsItems, trackEvent } from "../../lib/analytics";
 
 function Store() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isPromotionOpen, setIsPromotionOpen] = useState(false);
   const { totalItems, items, subtotal } = useCart();
 
   function handleOpenCart() {
@@ -17,6 +19,53 @@ function Store() {
       items: toAnalyticsItems(items),
     });
     setIsCartOpen(true);
+  }
+
+  useEffect(() => {
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Sao_Paulo",
+      weekday: "short",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(now);
+    const part = (type: string) =>
+      parts.find((current) => current.type === type)?.value;
+    const isWednesday = part("weekday") === "Wed";
+    const currentDate = `${part("year")}-${part("month")}-${part("day")}`;
+
+    if (
+      isWednesday &&
+      localStorage.getItem("mineiro-promotion-last-seen") !== currentDate
+    ) {
+      setIsPromotionOpen(true);
+    }
+  }, []);
+
+  function closePromotion() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Sao_Paulo",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(new Date());
+    const part = (type: string) =>
+      parts.find((current) => current.type === type)?.value;
+
+    localStorage.setItem(
+      "mineiro-promotion-last-seen",
+      `${part("year")}-${part("month")}-${part("day")}`,
+    );
+    setIsPromotionOpen(false);
+  }
+
+  function startOrderingFromPromotion() {
+    closePromotion();
+    document.getElementById("combos")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   }
 
   return (
@@ -80,6 +129,29 @@ function Store() {
         </a>
       </footer>
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      {isPromotionOpen && (
+        <div className="promotion-modal" role="dialog" aria-modal="true" aria-labelledby="promotion-title">
+          <div className="promotion-modal__content">
+            <button
+              type="button"
+              className="promotion-modal__close"
+              onClick={closePromotion}
+              aria-label="Fechar promoção"
+            >
+              ×
+            </button>
+            <h2 id="promotion-title">🔥 Imperdível hoje! 🔥</h2>
+            <img src={promotionImage} alt="Porção de batata frita grátis na promoção" />
+            <p>
+              Na compra de qualquer lanche, leve 1 porção de Batata Frita GRÁTIS!
+            </p>
+            <button type="button" onClick={startOrderingFromPromotion}>
+              Começar a pedir!
+            </button>
+            <small>A promoção não é válida para combos.</small>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

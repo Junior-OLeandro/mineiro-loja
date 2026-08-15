@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import logo from "../../assets/images/logomarca.png";
 import darkLogo from "../../assets/images/logoescura.png";
+import { products } from "../../data/product";
 import "./Admin.css";
 
 interface OrderItemExtra {
@@ -98,6 +99,10 @@ function Admin() {
   const [updatingStatus, setUpdatingStatus] = useState(false);
   const [showAllCompleted] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [manualStoreStatus, setManualStoreStatus] = useState<boolean | null>(null);
+  const [productAvailability, setProductAvailability] = useState<Record<string, boolean>>({});
+  const [deliveryTimeMinutes, setDeliveryTimeMinutes] = useState(45);
+  const [isProductControlsExpanded, setIsProductControlsExpanded] = useState(false);
 const soundEnabledRef = useRef(false);
 
 const playNewOrderSound = () => {
@@ -190,6 +195,67 @@ const enableSound = () => {
 
     loadOrders();
   }, [checkingAuth]);
+
+  useEffect(() => {
+    if (checkingAuth) return;
+
+    async function loadStoreControls() {
+      const [{ data: settings }, { data: availability }] = await Promise.all([
+        supabase.from("store_settings").select("manual_is_open, delivery_time_minutes").eq("id", 1).maybeSingle(),
+        supabase.from("menu_item_availability").select("product_id, is_available"),
+      ]);
+
+      setManualStoreStatus(settings?.manual_is_open ?? null);
+      setDeliveryTimeMinutes(settings?.delivery_time_minutes ?? 45);
+      setProductAvailability(
+        Object.fromEntries(
+          (availability ?? []).map((item) => [item.product_id, item.is_available]),
+        ),
+      );
+    }
+
+    loadStoreControls();
+  }, [checkingAuth]);
+
+  async function setStoreStatus(status: boolean | null) {
+    const { error } = await supabase
+      .from("store_settings")
+      .upsert({ id: 1, manual_is_open: status, updated_at: new Date().toISOString() });
+
+    if (error) {
+      console.error("Erro ao atualizar a loja:", error);
+      return;
+    }
+
+    setManualStoreStatus(status);
+  }
+
+  async function setProductStatus(productId: string, isAvailable: boolean) {
+    const { error } = await supabase
+      .from("menu_item_availability")
+      .upsert({ product_id: productId, is_available: isAvailable, updated_at: new Date().toISOString() });
+
+    if (error) {
+      console.error("Erro ao atualizar produto:", error);
+      return;
+    }
+
+    setProductAvailability((current) => ({ ...current, [productId]: isAvailable }));
+  }
+
+  async function saveDeliveryTime() {
+    if (!Number.isInteger(deliveryTimeMinutes) || deliveryTimeMinutes < 1 || deliveryTimeMinutes > 180) {
+      return;
+    }
+
+    const { error } = await supabase
+      .from("store_settings")
+      .upsert({ id: 1, delivery_time_minutes: deliveryTimeMinutes, updated_at: new Date().toISOString() });
+
+    if (error) {
+      console.error("Erro ao atualizar o prazo de entrega:", error);
+    }
+  }
 
   async function loadOrderById(orderId: string) {
     const { data, error } = await supabase
@@ -687,6 +753,59 @@ const enableSound = () => {
           <h2>Pedidos</h2>
           <p>Gerencie os pedidos recebidos pela Mineiro.</p>
         </div>
+
+        <section className="admin-store-controls">
+          <div>
+            <h3>Controle da loja</h3>
+            <p>
+              {manualStoreStatus === null
+                ? "Seguindo o horário automático"
+                : manualStoreStatus
+                  ? "Abertura manual ativa"
+                  : "Fechamento manual ativo"}
+            </p>
+          </div>
+          <div className="admin-store-controls__actions">
+            <button type="button" onClick={() => setStoreStatus(true)}>Abrir loja</button>
+            <button type="button" onClick={() => setStoreStatus(false)}>Fechar loja</button>
+            <button type="button" onClick={() => setStoreStatus(null)}>Seguir horário</button>
+          </div>
+          <div className="admin-delivery-time-control">
+            <label htmlFor="delivery-time-minutes">Tempo estimado de entrega (minutos)</label>
+            <input
+              id="delivery-time-minutes"
+              type="number"
+              min="1"
+              max="180"
+              value={deliveryTimeMinutes}
+              onChange={(event) => setDeliveryTimeMinutes(Number(event.target.value))}
+            />
+            <button type="button" onClick={saveDeliveryTime}>Salvar prazo</button>
+          </div>
+          <button
+            type="button"
+            className="admin-product-controls-toggle"
+            onClick={() => setIsProductControlsExpanded((current) => !current)}
+            aria-expanded={isProductControlsExpanded}
+          >
+            {isProductControlsExpanded ? "Ocultar itens" : `Gerenciar itens (${products.length})`}
+          </button>
+          {isProductControlsExpanded && (
+            <div className="admin-product-controls">
+              {products.map((product) => {
+                const isAvailable = productAvailability[product.id] ?? true;
+                return (
+                  <div key={product.id}>
+                    <span>{product.name}</span>
+                    <button type="button" onClick={() => setProductStatus(product.id, !isAvailable)}>
+                      {isAvailable ? "Pausar" : "Ativar"}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
 
         <section className="admin-summary">
           <article

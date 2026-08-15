@@ -62,6 +62,20 @@
   box-sizing: border-box;
 }
 
+.admin-store-controls { margin-bottom: 24px; padding: 20px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-header); }
+.admin-store-controls h3 { margin: 0; }
+.admin-store-controls p { margin: 6px 0 14px; color: var(--color-text-muted); }
+.admin-store-controls__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.admin-store-controls button { padding: 9px 12px; border: 1px solid var(--color-border); border-radius: 8px; background: rgba(255,255,255,.08); color: var(--color-text); cursor: pointer; font: inherit; font-weight: 700; }
+.admin-store-controls button:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.admin-product-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; margin-top: 18px; }
+.admin-product-controls > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px; border: 1px solid var(--color-border); border-radius: 8px; }
+.admin-product-controls span { font-size: 14px; font-weight: 700; }
+.admin-product-controls-toggle { margin-top: 18px; }
+.admin-delivery-time-control { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin-top: 18px; }
+.admin-delivery-time-control label { width: 100%; color: var(--color-text-muted); font-size: 13px; font-weight: 700; }
+.admin-delivery-time-control input { width: 90px; padding: 9px; border: 1px solid var(--color-border); border-radius: 8px; background: rgba(255,255,255,.08); color: var(--color-text); font: inherit; }
+
 .admin-welcome {
   margin-bottom: 28px;
 }

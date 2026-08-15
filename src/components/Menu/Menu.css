@@ -60,6 +60,22 @@
 
 .store-menu__theme-toggle:hover { background: var(--color-primary); color: #fff; }
 
+.store-menu__status {
+    flex: 0 0 auto;
+    padding: 7px 10px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.store-menu__status--open { color: #73d67c; }
+.store-menu__status--closed { color: #ff8c8c; }
+.store-menu__store-info { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.store-menu__delivery-time { color: var(--color-text-muted); font-size: .68rem; font-weight: 700; white-space: nowrap; }
+
 .store-menu__hero {
     max-width: var(--container-width);
     margin: 0 auto;
@@ -123,4 +139,6 @@
     }
 
     .store-menu__theme-toggle { margin-left: auto; }
+
+    .store-menu__store-info { order: 2; }
 }
