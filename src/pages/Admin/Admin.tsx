@@ -98,12 +98,14 @@ function Admin() {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [updatingStatus, setUpdatingStatus] = useState(false);
   const [showAllCompleted] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(
+    () => localStorage.getItem("mineiro-admin-sound-enabled") === "true",
+  );
   const [manualStoreStatus, setManualStoreStatus] = useState<boolean | null>(null);
   const [productAvailability, setProductAvailability] = useState<Record<string, boolean>>({});
   const [deliveryTimeMinutes, setDeliveryTimeMinutes] = useState(45);
   const [isProductControlsExpanded, setIsProductControlsExpanded] = useState(false);
-const soundEnabledRef = useRef(false);
+const soundEnabledRef = useRef(soundEnabled);
 
 const playNewOrderSound = () => {
   if (!soundEnabledRef.current) {
@@ -133,6 +135,7 @@ const enableSound = () => {
 
       soundEnabledRef.current = true;
       setSoundEnabled(true);
+      localStorage.setItem("mineiro-admin-sound-enabled", "true");
 
       console.log("🔔 SOM ATIVADO COM SUCESSO");
     })

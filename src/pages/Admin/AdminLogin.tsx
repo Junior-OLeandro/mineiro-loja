@@ -22,6 +22,16 @@ function AdminLogin() {
       password,
     });
 
+
+    const {
+  data: { session },
+} = await supabase.auth.getSession();
+
+console.log("SESSÃO SUPABASE:", session);
+console.log("USUÁRIO SUPABASE:", session?.user);
+
+
+
     if (error) {
       console.error("Erro no login:", error);
       setError("E-mail ou senha inválidos.");
