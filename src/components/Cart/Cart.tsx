@@ -6,6 +6,7 @@ import type { CartItem } from "../../types";
 import { products } from "../../data/product";
 import ProductModal from "../ProductModal/ProductModal";
 import Checkout from "../Checkout/Checkout";
+import { toAnalyticsItems, trackEvent } from "../../lib/analytics";
 
 interface CartProps {
   isOpen: boolean;
@@ -232,7 +233,14 @@ export function Cart({ isOpen, onClose }: CartProps) {
               <button
   type="button"
   className="cart__checkout"
-  onClick={() => setIsCheckoutOpen(true)}
+  onClick={() => {
+    trackEvent("begin_checkout", {
+      currency: "BRL",
+      value: subtotal,
+      items: toAnalyticsItems(items),
+    });
+    setIsCheckoutOpen(true);
+  }}
 >
   Finalizar pedido
 </button>

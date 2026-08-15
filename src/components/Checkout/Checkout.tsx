@@ -4,6 +4,7 @@ import type { OrderData } from "../../types";
 import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
 import { neighborhoods } from "../../data/neighborhoods";
+import { toAnalyticsItems, trackEvent } from "../../lib/analytics";
 
 interface CheckoutProps {
   onClose: () => void;
@@ -19,6 +20,7 @@ export function Checkout({ onClose }: CheckoutProps) {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [changeFor, setChangeFor] = useState("");
   const [needsChange, setNeedsChange] = useState(true);
+  const [pixKeyCopied, setPixKeyCopied] = useState(false);
 
 
   const [name, setName] = useState("");
@@ -59,6 +61,16 @@ export function Checkout({ onClose }: CheckoutProps) {
     selectedNeighborhoodData?.deliveryFee ?? 0;
 
   const total = subtotal + deliveryFee;
+
+  async function copyPixKey() {
+    try {
+      await navigator.clipboard.writeText("32984806357");
+      setPixKeyCopied(true);
+      window.setTimeout(() => setPixKeyCopied(false), 2500);
+    } catch (error) {
+      console.error("Não foi possível copiar a chave PIX:", error);
+    }
+  }
 
   const handleSubmit = async () => {
     const newErrors = {
@@ -189,6 +201,14 @@ console.log("Resposta RPC:", { data, error });
 
       setOrderId(String(generatedId));
       setConfirmedOrder(order);
+      trackEvent("purchase", {
+        transaction_id: String(generatedId),
+        currency: "BRL",
+        value: total,
+        shipping: deliveryFee,
+        payment_type: order.paymentMethod,
+        items: toAnalyticsItems(items),
+      });
     } catch (error) {
       console.error("Erro inesperado ao criar pedido:", error);
     }
@@ -660,6 +680,12 @@ console.log("Resposta RPC:", { data, error });
                     paymentMethod: "",
                     changeFor: "",
                   }));
+                  trackEvent("add_payment_info", {
+                    currency: "BRL",
+                    value: total,
+                    payment_type: "pix",
+                    items: toAnalyticsItems(items),
+                  });
                 }}
               >
                 PIX
@@ -682,6 +708,12 @@ console.log("Resposta RPC:", { data, error });
                     paymentMethod: "",
                     changeFor: "",
                   }));
+                  trackEvent("add_payment_info", {
+                    currency: "BRL",
+                    value: total,
+                    payment_type: "cash",
+                    items: toAnalyticsItems(items),
+                  });
                 }}
               >
                 Dinheiro
@@ -704,6 +736,12 @@ console.log("Resposta RPC:", { data, error });
                     paymentMethod: "",
                     changeFor: "",
                   }));
+                  trackEvent("add_payment_info", {
+                    currency: "BRL",
+                    value: total,
+                    payment_type: "card",
+                    items: toAnalyticsItems(items),
+                  });
                 }}
               >
                 Cartão
@@ -714,6 +752,25 @@ console.log("Resposta RPC:", { data, error });
               <span className="checkout__field-error">
                 {errors.paymentMethod}
               </span>
+            )}
+
+            {paymentMethod === "pix" && (
+              <div className="checkout__pix-info" aria-live="polite">
+                <strong>Dados para pagamento PIX</strong>
+                <span>
+                  <strong>Chave PIX:</strong> 32984806357
+                </span>
+                <span>
+                  <strong>Recebedora:</strong> Talita Cristina Lopes Souza
+                </span>
+                <button type="button" onClick={copyPixKey}>
+                  {pixKeyCopied ? "Chave copiada!" : "Copiar chave PIX"}
+                </button>
+                <p>
+                  Após o pagamento, envie o comprovante pelo WhatsApp para
+                  confirmar seu pedido.
+                </p>
+              </div>
             )}
 
             {paymentMethod === "dinheiro" && (

@@ -119,6 +119,7 @@
 
   grid-template-columns:
     minmax(170px, 0.8fr)
+    minmax(150px, 0.7fr)
     minmax(200px, 1fr)
     minmax(180px, 0.9fr)
     minmax(180px, 0.9fr)
@@ -958,9 +959,7 @@
 
 @media (max-width: 1050px) {
   .orders-filters {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr))
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .orders-clear-filters {

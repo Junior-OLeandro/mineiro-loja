@@ -8,6 +8,7 @@ import {
 } from 'react'
 
 import type { CartItem, CartItemExtra, Product } from '../types'
+import { trackEvent } from '../lib/analytics'
 
 interface CartContextData {
   items: CartItem[]
@@ -60,6 +61,20 @@ export function CartProvider({ children }: CartProviderProps) {
       meatPoint?: CartItem["meatPoint"],
     ) => {
       const price = unitPrice ?? product.price ?? 0
+
+      trackEvent('add_to_cart', {
+        currency: 'BRL',
+        value: price + extras.reduce((total, extra) => total + extra.price, 0),
+        items: [
+          {
+            item_id: product.id,
+            item_name: product.name,
+            item_variant: variant,
+            price: price + extras.reduce((total, extra) => total + extra.price, 0),
+            quantity: 1,
+          },
+        ],
+      })
 
       setItems((currentItems) => {
         const existingItem = currentItems.find((item) => {

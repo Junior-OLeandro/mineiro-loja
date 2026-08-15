@@ -106,6 +106,7 @@ function Orders() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [periodFilter, setPeriodFilter] = useState("all");
+  const [orderNumberFilter, setOrderNumberFilter] = useState("");
   const [nameFilter, setNameFilter] = useState("");
   const [phoneFilter, setPhoneFilter] = useState("");
   const [neighborhoodFilter, setNeighborhoodFilter] = useState("");
@@ -328,6 +329,11 @@ function Orders() {
   }
 
   const filteredOrders = orders.filter((order) => {
+    // NÚMERO DO PEDIDO
+    const orderNumber = order.order_number.toString();
+    const filterOrderNumber = orderNumberFilter.replace(/\D/g, "");
+    const matchesOrderNumber = orderNumber.includes(filterOrderNumber);
+
     // =========================
     // NOME
     // =========================
@@ -388,6 +394,7 @@ function Orders() {
     }
 
     return (
+      matchesOrderNumber &&
       matchesName &&
       matchesPhone &&
       matchesNeighborhood &&
@@ -481,6 +488,23 @@ function Orders() {
           </div>
 
           <div className="orders-filter-group">
+            <label htmlFor="order-number-filter">
+              Número do pedido
+            </label>
+
+            <input
+              id="order-number-filter"
+              type="text"
+              inputMode="numeric"
+              placeholder="Ex.: 123"
+              value={orderNumberFilter}
+              onChange={(event) =>
+                setOrderNumberFilter(event.target.value)
+              }
+            />
+          </div>
+
+          <div className="orders-filter-group">
             <label htmlFor="phone-filter">
               Telefone
             </label>
@@ -517,6 +541,7 @@ function Orders() {
             className="orders-clear-filters"
             onClick={() => {
               setPeriodFilter("all");
+              setOrderNumberFilter("");
               setNameFilter("");
               setPhoneFilter("");
               setNeighborhoodFilter("");

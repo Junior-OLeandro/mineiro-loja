@@ -1,6 +1,6 @@
 import { categories } from "../../data/categories";
 import { products } from "../../data/product";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import CategorySection from "../CategorySection/CategorySection";
 import logo from "../../assets/images/logomarca.png";
 import darkLogo from "../../assets/images/logoescura.png";
@@ -13,6 +13,17 @@ function Menu() {
     () => localStorage.getItem("mineiro-theme") === "light",
   );
 
+  function scrollToCategory(
+    event: MouseEvent<HTMLAnchorElement>,
+    categorySlug: string,
+  ) {
+    event.preventDefault();
+    document.getElementById(categorySlug)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
   useEffect(() => {
     document.body.classList.toggle("theme-light", isLightTheme);
     localStorage.setItem("mineiro-theme", isLightTheme ? "light" : "dark");
@@ -20,12 +31,23 @@ function Menu() {
   return (
     <div className="store-menu">
       <header className="store-menu__header">
-        <a className="store-menu__brand" href="#combos" aria-label="Mineiro Hamburgueria - início">
+        <a
+          className="store-menu__brand"
+          href="#combos"
+          aria-label="Mineiro Hamburgueria - início"
+          onClick={(event) => scrollToCategory(event, "combos")}
+        >
           <img src={isLightTheme ? darkLogo : logo} alt="Mineiro Hamburgueria" />
         </a>
         <nav className="store-menu__navigation" aria-label="Categorias">
           {orderedCategories.map((category) => (
-            <a key={category.id} href={`#${category.slug}`}>{category.name}</a>
+            <a
+              key={category.id}
+              href={`#${category.slug}`}
+              onClick={(event) => scrollToCategory(event, category.slug)}
+            >
+              {category.name}
+            </a>
           ))}
         </nav>
         <button

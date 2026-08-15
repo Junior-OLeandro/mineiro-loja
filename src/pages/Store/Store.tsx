@@ -4,10 +4,20 @@ import "./Store.css";
 import Menu from "../../components/Menu/Menu";
 import Cart from "../../components/Cart/Cart";
 import { useCart } from "../../hooks/useCart";
+import { toAnalyticsItems, trackEvent } from "../../lib/analytics";
 
 function Store() {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { totalItems } = useCart();
+  const { totalItems, items, subtotal } = useCart();
+
+  function handleOpenCart() {
+    trackEvent("view_cart", {
+      currency: "BRL",
+      value: subtotal,
+      items: toAnalyticsItems(items),
+    });
+    setIsCartOpen(true);
+  }
 
   return (
     <main>
@@ -15,7 +25,7 @@ function Store() {
       <button
   type="button"
   className="floating-cart"
-  onClick={() => setIsCartOpen(true)}
+  onClick={handleOpenCart}
   aria-label={`Abrir carrinho com ${totalItems} itens`}
 >
   <span className="floating-cart__icon-wrapper">
