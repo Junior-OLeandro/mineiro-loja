@@ -1,6 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import { CartProvider } from "./context/CartContext";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 import Admin from "./pages/Admin/Admin";
 import AdminLogin from "./pages/Admin/AdminLogin";
@@ -10,19 +8,15 @@ import Orders from "./pages/Admin/Orders";
 
 function App() {
   return (
-    <BrowserRouter>
-      <CartProvider>
-        <Routes>
-          <Route path="/" element={<Store />} />
-          <Route path="/admin/pedidos" element={<Orders />} />
-
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<Admin />} />
-
-          <Route path="/print" element={<Print />} />
-        </Routes>
-      </CartProvider>
-    </BrowserRouter>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Store />} />
+        <Route path="/admin/pedidos" element={<Orders />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/print" element={<Print />} />
+      </Routes>
+    </HashRouter>
   );
 }
 

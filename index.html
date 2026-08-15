@@ -38,6 +38,23 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // O GitHub Pages envia as rotas inexistentes para 404.html. A página
+      // preserva a rota na query string e este script a restaura antes do React.
+      (function (location) {
+        if (location.search.startsWith("?/") ) {
+          const route = location.search
+            .slice(1)
+            .split("&")
+            .map(function (part) {
+              return part.replace(/~and~/g, "&");
+            })
+            .join("?");
+
+          window.history.replaceState(null, "", route + location.hash);
+        }
+      })(window.location);
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
