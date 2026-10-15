@@ -11,7 +11,7 @@ export const products: Product[] = [
     name: "Combo Trem Bão",
     description:
       "Trem Bão + Batata Individual + Refri 350ml (2 Bifes artesanais de 160g cada, fatias de cheddar, tiras de bacon e barbecue. Acompanha maionese mineira.)",
-    price: 57.9,
+    price: 62.9,
     image: comboTremBao,
     alt: "Hamburguer com batata e refri",
     hasMeatChoice: true,
@@ -25,7 +25,7 @@ export const products: Product[] = [
     name: "Combo Mineiro",
     description:
       "Mineiro + Batata Individual + Refri 350ml (Bife artesanal 160g, queijo canastra, banana da terra frita, tiras de bacon, melado de cana e couve crispy. Acompanha maionese caseira.)",
-    price: 49.9,
+    price: 53.9,
     image: comboMineiro,
     alt: "Hamburguer com batata e refri",
     hasMeatChoice: true,
@@ -39,7 +39,7 @@ export const products: Product[] = [
     name: "Combo Tropical",
     description:
       "Tropical + Batata Individual + Refri 350ml (Bife artesanal 160g, fatias de cheddar, cream cheese, tiras de bacon e chutney de abacaxi. Acompanha maionese mineira.)",
-    price: 47.9,
+    price: 52.9,
     image: comboTropical,
     alt: "Hamburguer com batata e refri",
     hasMeatChoice: true,
@@ -151,7 +151,7 @@ export const products: Product[] = [
     name: "Boi Doido",
     description:
       "Bifes artesanal 160g, fatias de cheddar, tiras de bacon, requeijão e costela bovina desfiada. Acompanha maionese mineira.",
-    price: 38.9,
+    price: 42.9,
     image: boiDoido,
     alt: "Hamburguer com carne desfiada com queijo e bacon",
     hasMeatChoice: true,
