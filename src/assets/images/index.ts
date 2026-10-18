@@ -28,6 +28,7 @@ import smashMineiro from "./lanches/smash-mineiro.webp";
 
 import tropical from "./lanches/tropical.webp";
 import tremBao from "./lanches/trem-bao.webp";
+import smashIzinho from "./lanches/smashizinho.webp";
 
 export {
   baconDocinho,
@@ -52,6 +53,7 @@ export {
   smashBacon,
   smashCheese,
   smashMineiro,
+  smashIzinho,
   tropical,
   tremBao,
 };

@@ -1,5 +1,5 @@
 import type { Product } from "../types";
-import {baconDocinho, batata, batataCb, batataCc, boiDoido, caramelizado, chicoBento, chimiburguer, comboMineiro, comboTremBao, comboTropical, coca, coca600, cocaZero, cocaZero600, guarana, guaranaZero, mineiro, romeu, smashBacon, smashCheese, smashMineiro, tropical, tremBao} from "../assets/images";
+import {baconDocinho, batata, batataCb, batataCc, boiDoido, caramelizado, chicoBento, chimiburguer, comboMineiro, comboTremBao, comboTropical, coca, coca600, cocaZero, cocaZero600, guarana, guaranaZero, mineiro, romeu, smashBacon, smashCheese, smashMineiro, tropical, tremBao, smashIzinho} from "../assets/images";
 
 import { burgerExtraIds } from "./extras";
 
@@ -228,7 +228,7 @@ export const products: Product[] = [
     name: "Smashizinho",
     description:
       "Smash burguer 70g, cheddar fatiado e salada de alface e tomate. Acompanha maionese mineira.",
-    image: smashBacon,
+    image: smashIzinho,
     alt: "Smashizinho Smash burguer com queijo e salada",
     prices: {
       simples: 17.9,
